@@ -1,0 +1,26 @@
+name: Upload Artifact Demo
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create temp folder
+        run: mkdir temp
+
+      - name: Create files using echo
+        run: |
+          echo "alpha" > temp/alpha.html
+          echo "beta" > temp/beta.txt
+          echo "gamma" > temp/gamma.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: assets-for-download
+          path: temp/
